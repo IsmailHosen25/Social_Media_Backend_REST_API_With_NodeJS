@@ -1,0 +1,32 @@
+{
+  "name": "social_media_backend_rest_api_with_nodejs",
+  "version": "1.0.0",
+  "description": "practice base backend server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsmailHosen25/Social_Media_Backend_REST_API_With_NodeJS.git"
+  },
+  "keywords": [
+    "smbra"
+  ],
+  "author": "hasan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsmailHosen25/Social_Media_Backend_REST_API_With_NodeJS/issues"
+  },
+  "homepage": "https://github.com/IsmailHosen25/Social_Media_Backend_REST_API_With_NodeJS#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.2",
+    "nodemon": "^2.0.22"
+  }
+}
