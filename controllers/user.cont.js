@@ -139,5 +139,29 @@ return  res.status(404).send({message:e.message})
 
 }
 }
+const dltuser=async(req,res)=>{
+  const email=req.params.email
+  const password=req.params.password
+  const username=req.username
+try{
 
-module.exports={signup,login,updateuser}
+   const userExist= await userModel.findOne({$and:[{email:email},{username:username}]})
+   if(userExist){
+        const passwordvalidation=bcrypt.compare(password,userExist.password)
+        if(passwordvalidation){
+           const deleteuser=await userModel.findByIdAndDelete({_id:userExist._id})
+           if(deleteuser){
+              return res.status(200).send({message:"deleted"})
+           }
+        }else{
+          return res.status(203).send({message:"wrong password"})
+        }
+   }else{
+      return  res.status(202).send({message:"not valid user"})
+   }
+
+}catch(e){
+ return res.status(404).send({message:e.message})
+}
+}
+module.exports={signup,login,updateuser,dltuser}
