@@ -59,7 +59,7 @@ const login=async(req,res)=>{
             }, process.env.TOKEN_SECRET_CODE, {expiresIn:"2d"})
 
 
-            return res.status(200).send({message:"success",token:token})
+            return res.status(200).send({message:"success",token:"Bearer "+token})
 
 
             }else{
@@ -83,7 +83,7 @@ const login=async(req,res)=>{
               }, process.env.TOKEN_SECRET_CODE, {expiresIn:"2d"})
 
 
-              return res.status(200).send({message:"success",token:token})
+              return res.status(200).send({message:"success",token:"Bearer "+token})
 
 
               }else{
@@ -103,6 +103,41 @@ const login=async(req,res)=>{
        }
 }
 
+const updateuser=async (req,res)=>{
+  const username=req.username
+  const id=req.id
+  const firstname=req.body.firstname
+  const lastname=req.body.lastname
+try{
+    const userExist=await userModel.findOne({$and:[{username:username},{_id:id}]})
+    if(userExist){
+         
+      const updateuser=await userModel.findByIdAndUpdate({_id:userExist._id},
+        {
+          $set:{
+            firstname:firstname,
+            lastname:lastname
+          }
+        },
+        {new:true}
+        
+        )
+        if(updateuser){
+          return res.status(200).send({message:"updated"})
+        }else{
+          return res.status(203).send({message:"not updated, please try again"})
+        }
+        
+    }else{
+     return  res.status(204).send({message:"token expired"})
+    }
+  
 
+}catch(e){
 
-module.exports={signup,login}
+return  res.status(404).send({message:e.message})
+
+}
+}
+
+module.exports={signup,login,updateuser}
